@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# The name of the branch you want to protect
+PROTECTED_BRANCH="your-secret-branch"
+
+# Git passes information to the pre-push hook via standard input.
+# We read that input to find out which branch is being pushed.
+while read local_ref local_oid remote_ref remote_oid; do
+    # Extract just the branch name from the full reference path
+    branch_name=$(echo "$local_ref" | awk -F'/' '{print $3}')
+
+    # If the branch being pushed matches our protected branch, block it
+    if [ "$branch_name" = "$PROTECTED_BRANCH" ]; then
+        echo "ERROR: Push blocked! The pre-push hook is preventing '$PROTECTED_BRANCH' from leaving your machine."
+        exit 1 # This tells Git to cancel the push
+    fi
+done
+
+exit 0 # This tells Git everything is fine, allow the push
