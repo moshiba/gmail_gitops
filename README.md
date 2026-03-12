@@ -9,8 +9,8 @@ Keeping actual filters in local branch that does not get synced
 git config core.hooksPath .githooks
 git worktree add -b local-filters local-filters
 cd local-filters
-git config branch.local-filters.remote "DO-NOT-PUSH"
-git rm -r ./*
+#git config branch.local-filters.remote "DO-NOT-PUSH"
+git rm -r . ":(exclude).git" ":(exclude).githooks"
 git commit -a -m "Cleanup to init"
 cd -
 ```
