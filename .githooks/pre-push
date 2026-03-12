@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The name of the branch you want to protect
-PROTECTED_BRANCH="your-secret-branch"
+PROTECTED_BRANCH="local-filters"
 
 # Git passes information to the pre-push hook via standard input.
 # We read that input to find out which branch is being pushed.
